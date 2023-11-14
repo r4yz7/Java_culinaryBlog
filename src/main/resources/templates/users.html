@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>Users</title>
+
+</head>
+<header th:insert="section/header ::header"></header>
+<body>
+    <div class="container">
+        <h1 style="text-align: center">UserList</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${users}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getLogin()}"></td>
+                <td th:text="${user.getEmail()}"></td>
+                <td th:text="${user.getPassword()}"></td>
+                <td th:text="${user.getRole().getRole()}"></td>
+                <td><a class="btn btn-outline-danger" th:href="'user/'+${user.getId()}+'/delete'">Delete</a></td>
+                <td><a class="btn btn-outline-warning" th:href="'user/'+${user.getId()}+'/edit'">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<footer th:insert="section/footer ::footer"></footer>
+
+</html>

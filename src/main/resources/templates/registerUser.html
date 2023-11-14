@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+</head>
+<header th:insert="section/header ::header"></header>
+<body>
+<div class="container mt-4">
+    <div class="container min-vh-100">
+        <section>
+            <div class="container">
+                <div class="position-absolute top-50 start-50 translate-middle border p-4 rounded">
+                    <h3>Register to the website</h3>
+                    <form method="post" action="/user/register">
+                        <div class="mb-3">
+                            <label class="form-label" for="login">Login</label>
+                            <input class="form-control" id="login" name="login" type="text" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" id="email" name="email" type="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" id="password" name="password" type="password" required>
+                        </div>
+                       <button class="btn btn-outline-success">Register</button>
+                        <a class="btn btn-outline-primary" href="/user/login">Sign in</a>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+</div>
+</body>
+<footer th:insert="section/footer ::footer"></footer>
+
+</html>

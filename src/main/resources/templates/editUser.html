@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+  <meta charset="UTF-8">
+  <title>Users</title>
+</head>
+<header th:insert="section/header ::header"></header>
+<body>
+<div class="container">
+  <h1 style="text-align: center">Edit</h1>
+  <form method="post" th:action="'/user/'+${user.getId()}+'/edit'">
+    <div class="mb-3">
+      <label class="form-label" for="login">Login</label>
+      <input class="form-control" id="login" type="text" required name="login" th:value="${user.getLogin()}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="email">Email</label>
+      <input class="form-control" name="email" type="email" required id="email" th:value="${user.getEmail()}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="roleId">Role</label>
+      <select class="form-select" id="roleId" name="roleId" >
+        <option th:each="role:${roles}" th:value="${role.getId()}" th:text="${role.getRole()}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-outline-success">Edit</button>
+  </form>
+</div>
+</body>
+<footer th:insert="section/footer ::footer"></footer>
+
+</html>

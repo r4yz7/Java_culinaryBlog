@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>Clients</title>
+
+</head>
+<header th:insert="section/header ::header"></header>
+<body>
+<div class="container mt-4">
+    <div class="mb-3">
+        <h1 style="text-align: center">Recipes</h1>
+    </div>
+
+    <div class="container">
+        <div th:each="item:${posts}" class="card-body">
+            <h5 class="card-title" th:text="${item.getTitle()}"></h5>
+            <p class="card-text" th:text="'Rating: ' + ${item.getAvgRating()}"></p>
+            <hr>
+        </div>
+
+    </div>
+</div>
+</body>
+<footer th:insert="section/footer ::footer"></footer>
+
+</html>
