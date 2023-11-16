@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>Clients</title>
+
 </head>
+<header th:insert="section/header ::header"></header>
 <body>
-$END$
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Post Details</h2>
+            <img class="card-img-top" th:src="'/'+${post.getImageUrl()}" th:alt="${post.getImageUrl()}">
+            <h3 class="card-subtitle mb-2" th:text="${post.getTitle()}"></h3>
+            <p class="card-text" th:text="${post.getContext()}"></p>
+        </div>
+    </div>
+</div>
 </body>
+<footer th:insert="section/footer ::footer"></footer>
+
 </html>

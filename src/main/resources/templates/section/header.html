@@ -6,10 +6,10 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">All apartments</a></li>
-            <li class="nav-item"><a href="/getAvailableApartments" class="nav-link">Available apartments</a></li>
-            <li class="nav-item"><a href="/client" class="nav-link">Clients</a></li>
-            <li class="nav-item"><a href="/landlord" class="nav-link">Landlords</a></li>
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Main</a></li>
+            <li class="nav-item">
+                <a th:if="${session.userRole=='radmin' || session.userRole=='ruser'}" href="/post/new" class="nav-link">New post</a>
+            </li>
             <li class="nav-item">
                 <a th:if="${session.userRole == null}" href="/user/register" class="nav-link">Sign Up</a>
                 <a th:if="${session.userRole != null}" href="/user/exit" class="nav-link">Exit</a>

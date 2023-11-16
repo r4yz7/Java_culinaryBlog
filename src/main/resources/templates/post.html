@@ -11,14 +11,25 @@
     <div class="mb-3">
         <h1 style="text-align: center">Recipes</h1>
     </div>
+</div>
 
-    <div class="container">
-        <div th:each="item:${posts}" class="card-body">
-            <h5 class="card-title" th:text="${item.getTitle()}"></h5>
-            <p class="card-text" th:text="'Rating: ' + ${item.getAvgRating()}"></p>
-            <hr>
+<div class="container">
+    <div th:each="post:${posts}" class="row g-0 mb-4">
+        <div class="col-md-4  ">
+            <img class='card-img-top'  th:src="${post.getImageUrl()}" th:alt="${post.getImageUrl()}">
         </div>
+        <div class="col-md-8 border p-4">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${post.getTitle()}"></h5>
+                <p class="card-text" th:text="'Rating:' + ${post.getAvgRating()}"></p>
+                <p class="card-text" th:text="'Author:' + ${post.user.getLogin()}"></p>
+                <form method="post" th:action="'/post/'+${post.id}+'/details'">
+                    <button type="submit" class="btn btn-outline-info">Details</button>
+                </form>
 
+            </div>
+        </div>
+        <hr>
     </div>
 </div>
 </body>

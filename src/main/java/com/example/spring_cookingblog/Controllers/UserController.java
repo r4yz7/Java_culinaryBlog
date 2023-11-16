@@ -48,6 +48,7 @@ public class UserController {
         User user = userRepository.findByLoginAndPassword(login,password);
         if(user!=null){
             Role role = user.getRole();
+            session.setAttribute("userId",user.getId());
             if(role.getId()==1){
                 session.setAttribute("userRole","ruser");
             }
@@ -66,23 +67,36 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model){
-        Iterable<User>users = userRepository.findAll();
-        model.addAttribute("users",users);
-        return "users";
+    public String getUsers(Model model,HttpSession session){
+        String checkRole = (String) session.getAttribute("userRole");
+        if(checkRole.equals("radmin")){
+            Iterable<User>users = userRepository.findAll();
+            model.addAttribute("users",users);
+            return "users";
+        }
+        else{
+            return "accessDenied";
+        }
+
     }
 
     @GetMapping("/user/{id}/delete")
-    public String deleteUser(@PathVariable(value = "id")Long id,Model model){
+    public String deleteUser(@PathVariable(value = "id")Long id,Model model, HttpSession session){
+        String checkRole = (String) session.getAttribute("userRole");
+        if(checkRole.equals("radmin")){
         User user = userRepository.findById(id).orElse(null);
         if(user!=null){
             userRepository.delete(user);
         }
         return "users";
+        }
+        return "accessDenied";
     }
 
     @GetMapping("/user/{id}/edit")
-    public String editUser(@PathVariable(value = "id")Long id,Model model){
+    public String editUser(@PathVariable(value = "id")Long id,Model model, HttpSession session){
+        String checkRole = (String) session.getAttribute("userRole");
+        if(checkRole.equals("radmin")){
         User user = userRepository.findById(id).orElse(null);
         if (user!=null){
             model.addAttribute("user",user);
@@ -90,11 +104,15 @@ public class UserController {
             model.addAttribute("roles",roles);
             return "editUser";
         }
-        return "users";
+        return "users";}
+        return "accessDenied";
     }
 
     @PostMapping("/user/{id}/edit")
-    public String editUser(@PathVariable(value = "id")Long id,@RequestParam String login, @RequestParam String email, @RequestParam Long roleId,Model model) {
+    public String editUser(@PathVariable(value = "id")Long id,@RequestParam String login, @RequestParam String email,
+                           @RequestParam Long roleId,Model model, HttpSession session) {
+        String checkRole = (String)session.getAttribute("userRole");
+        if(checkRole.equals("radmin")){
         User user = userRepository.findById(id).orElse(null);
         if (user != null) {
             if (!login.equals(user.getLogin())) {
@@ -109,6 +127,7 @@ public class UserController {
             }
             userRepository.save(user);
         }
-        return "redirect:/users";
+        return "redirect:/users";}
+        return "accessDenied";
     }
 }
