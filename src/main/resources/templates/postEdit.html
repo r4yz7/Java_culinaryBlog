@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>Users</title>
 </head>
+<header th:insert="section/header ::header"></header>
 <body>
-$END$
+<div class="container">
+    <h1 style="text-align: center">Edit post</h1>
+    <form method="post" th:action="'/post/'+${post.getId()}+'/edit'" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" id="title" type="text" name="title" th:value="${post.getTitle()}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="text">Text</label>
+            <textarea rows="20" class="form-control" name="text" id="text" th:text="${post.getContext()}"></textarea>
+        </div>
+<!--        <div class="mb-3">-->
+<!--            <label class="form-label" for="img">Image</label>-->
+<!--            <input type="file" class="form-control" id="img" name="img">-->
+<!--        </div>-->
+        <button type="submit" class="btn btn-outline-success">Edit</button>
+    </form>
+</div>
 </body>
+<footer th:insert="section/footer ::footer"></footer>
+
 </html>

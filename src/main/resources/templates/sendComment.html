@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="section/head :: head">
+    <meta charset="UTF-8">
+    <title>comment</title>
+
 </head>
+<header th:insert="section/header ::header"></header>
 <body>
-$END$
+    <div class="container">
+        <form method="post" th:action="'/post/'+${post.getId()}+'/comment'">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <textarea name="text" class="form-control" placeholder="Enter text" id="text"></textarea>
+                    <label for="text">Text</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="rating">Rating</label>
+                <input type="number" class="form-control" name="rating" id="rating" max="5" min="0">
+            </div>
+            <button type="submit" class="btn btn-outline-success">Send</button>
+        </form>
+    </div>
 </body>
+<footer th:insert="section/footer ::footer"></footer>
 </html>

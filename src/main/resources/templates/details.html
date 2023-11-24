@@ -2,22 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="section/head :: head">
     <meta charset="UTF-8">
-    <title>Clients</title>
+    <title>Recipe</title>
 
 </head>
 <header th:insert="section/header ::header"></header>
 <body>
 <div class="container mt-5">
-    <div class="card">
+    <div class="card" >
         <div class="card-body">
-            <h2 class="card-title">Post Details</h2>
-            <img class="card-img-top" th:src="'/'+${post.getImageUrl()}" th:alt="${post.getImageUrl()}">
             <h3 class="card-subtitle mb-2" th:text="${post.getTitle()}"></h3>
+            <img style="width: 500px; height: 500px" class="card-img-top"  th:src="'/'+${post.getImageUrl()}" th:alt="${post.getImageUrl()}">
             <p class="card-text" th:text="${post.getContext()}"></p>
         </div>
     </div>
+    <div  th:each="comment : ${post.getComments()}">
+        <div class="card mt-3" >
+            <div class="card-body" style="background-color: #e0e0e0">
+                <p class="card-text">
+                    <span style="float: left; font-size: 20px; font-weight: bold" th:text="${comment.getUser().getLogin()}"></span>
+                    <span style="float: right;color: #ff9900" th:text="'Rating: ' + ${comment.getRating()}"></span>
+                </p>
+                <br>
+                <p class="card-text" th:text="${comment.getText()}"></p>
+            </div>
+        </div>
+
+    </div>
+    <a class="mt-5 btn btn-outline-primary" th:href="'/post/'+${post.getId()}+'/comment'">Leave a comment</a>
 </div>
 </body>
 <footer th:insert="section/footer ::footer"></footer>
-
 </html>
